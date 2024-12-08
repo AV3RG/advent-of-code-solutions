@@ -1,5 +1,6 @@
 pub mod grid_utils;
 pub mod num_utils;
+pub mod combinatorics;
 
 pub fn add(left: u64, right: u64) -> u64 {
     left + right

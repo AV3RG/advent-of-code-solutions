@@ -1,4 +1,4 @@
-use aoc_utils::grid_utils::{find_in_grid, get_horizontal_line, get_vertical_line};
+use aoc_utils::grid_utils::{find_first_in_grid, get_horizontal_line, get_vertical_line};
 use std::collections::HashSet;
 use std::ops::{BitAnd, BitOrAssign, Not};
 
@@ -78,7 +78,7 @@ pub fn part_one(input: &str) -> Option<u32> {
     let horizontal_range = 0..m as i32;
     let mut visited_with_directions = vec![vec![VisitedDirections::new(); m]; n];
     let mut current_direction = Direction::Up;
-    let mut current_location = find_in_grid(&grid, &'^').clone().unwrap();
+    let mut current_location = find_first_in_grid(&grid, &'^').clone().unwrap();
     let mut visited = HashSet::new();
     while visited_with_directions.get(current_location.0).unwrap().get(current_location.1).unwrap().is_visited(&current_direction).not() {
         visited_with_directions.get_mut(current_location.0).unwrap().get_mut(current_location.1).unwrap().visit(&current_direction);
@@ -106,7 +106,7 @@ pub fn part_two_first_try(input: &str) -> Option<u32> {
     let horizontal_range = 0..m as i32;
     let mut visited_with_directions = vec![vec![VisitedDirections::new(); m]; n];
     let mut current_direction = Direction::Up;
-    let mut current_location = find_in_grid(&grid, &'^').clone().unwrap();
+    let mut current_location = find_first_in_grid(&grid, &'^').clone().unwrap();
     let initial_location = current_location.clone();
     let mut points = HashSet::new();
     while visited_with_directions.get(current_location.0).unwrap().get(current_location.1).unwrap().is_visited(&current_direction).not() {
@@ -187,7 +187,7 @@ pub fn part_two(input: &str) -> Option<u32> {
     let (n, m) = (grid.len(), grid[0].len());
     let vertical_range = 0..n as i32;
     let horizontal_range = 0..m as i32;
-    let mut current_location = find_in_grid(&grid, &'^').clone().unwrap();
+    let mut current_location = find_first_in_grid(&grid, &'^').clone().unwrap();
     let mut current_direction = Direction::Up;
     let initial_location = current_location.clone();
     let mut count = 0;
