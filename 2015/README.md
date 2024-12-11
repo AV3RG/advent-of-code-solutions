@@ -15,6 +15,7 @@ Solutions for [Advent of Code](https://adventofcode.com/) in [Rust](https://www.
 | [Day 2](./src/bin/02.rs) | `52.2µs` | `53.4µs` |
 | [Day 3](./src/bin/03.rs) | `198.5µs` | `210.1µs` |
 | [Day 4](./src/bin/04.rs) | `54.9ms` | `224.6ms` |
+| [Day 5](./src/bin/05.rs) | `1.9ms` | `1.3ms` |
 
-**Total: 280.02ms**
+**Total: 283.22ms**
 <!--- benchmarking table --->
