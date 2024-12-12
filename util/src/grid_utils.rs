@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet, VecDeque};
 use std::fmt::Debug;
 use std::hash::Hash;
 
@@ -71,10 +71,57 @@ pub fn get_manhattan_neighbours(pos: (usize, usize), m: usize, n: usize) -> Vec<
     result
 }
 
+pub fn get_vertical_neighbours(pos: (usize, usize), n: usize) -> Vec<(usize, usize)> {
+    let mut result = Vec::new();
+    let (y, x) = pos;
+    if y > 0 {
+        result.push((y - 1, x));
+    }
+    if y < n - 1 {
+        result.push((y + 1, x));
+    }
+    result
+}
+
+pub fn get_horizontal_neighbours(pos: (usize, usize), m: usize) -> Vec<(usize, usize)> {
+    let mut result = Vec::new();
+    let (y, x) = pos;
+    if x > 0 {
+        result.push((y, x - 1));
+    }
+    if x < m - 1 {
+        result.push((y, x + 1));
+    }
+    result
+}
+
 pub fn get_horizontal_line<T>(grid: &Vec<Vec<T>>, y: usize) -> Vec<&T> {
     grid.get(y).unwrap().iter().collect()
 }
 
 pub fn get_vertical_line<T>(grid: &Vec<Vec<T>>, x: usize) -> Vec<&T> {
     grid.into_iter().map(|row| &row[x]).collect()
+}
+
+pub fn get_similar_region_around<T>(grid: &Vec<Vec<T>>, pos: (usize, usize), m: usize, n: usize, matcher: fn(&T, &T) -> bool) -> HashSet<(usize, usize)> {
+    let mut consumed = HashSet::new();
+    let mut queue = VecDeque::new();
+    queue.push_back(pos);
+    while !queue.is_empty() {
+        let current = queue.pop_front().unwrap();
+        if consumed.contains(&current) {
+            continue;
+        }
+        consumed.insert(current);
+        let neighbours = get_manhattan_neighbours(current, m, n);
+        for neighbour in neighbours {
+            if consumed.contains(&neighbour) {
+                continue;
+            }
+            if matcher(&grid[current.0][current.1], &grid[neighbour.0][neighbour.1]) {
+                queue.push_back(neighbour);
+            }
+        }
+    }
+    consumed
 }
