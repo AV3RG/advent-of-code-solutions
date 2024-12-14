@@ -125,3 +125,23 @@ pub fn get_similar_region_around<T>(grid: &Vec<Vec<T>>, pos: (usize, usize), m: 
     }
     consumed
 }
+
+pub fn largest_island<T>(grid: &Vec<Vec<T>>, m: usize, n: usize, skipper: fn(&T) -> bool, matcher: fn(&T, &T) -> bool) -> usize {
+    let mut consumed = HashSet::new();
+    let mut max_size = 0;
+    for y in 0..n {
+        for x in 0..m {
+            if skipper(&grid[y][x]) {
+                continue;
+            }
+            if consumed.contains(&(y, x)) {
+                continue;
+            }
+            let region = get_similar_region_around(grid, (y, x), m, n, matcher);
+            let n = region.len();
+            consumed.extend(region);
+            max_size = max_size.max(n);
+        }
+    }
+    max_size
+}
