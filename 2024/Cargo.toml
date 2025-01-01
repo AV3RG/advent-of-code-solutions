@@ -28,5 +28,6 @@ pico-args = "0.5.0"
 tinyjson = "2.5.1"
 regex = "1.11.1"
 aoc-utils = { path = "../util" }
+pathfinding = "4.13.0"
 
 # Solution dependencies
