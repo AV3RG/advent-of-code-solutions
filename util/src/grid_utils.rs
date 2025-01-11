@@ -71,6 +71,28 @@ pub fn get_manhattan_neighbours(pos: (usize, usize), m: usize, n: usize) -> Vec<
     result
 }
 
+pub fn get_diagonal_neighbours(pos: (usize, usize), m: usize, n: usize) -> Vec<(usize, usize)> {
+    let mut result = Vec::new();
+    let (y, x) = pos;
+    if x > 0 && y > 0 {
+        result.push((y - 1, x - 1));
+    }
+    if x < m - 1 && y > 0 {
+        result.push((y - 1, x + 1));
+    }
+    if x > 0 && y < n - 1 {
+        result.push((y + 1, x - 1));
+    }
+    if x < m - 1 && y < n - 1 {
+        result.push((y + 1, x + 1));
+    }
+    result
+}
+
+pub fn get_all_neighbours(pos: (usize, usize), m: usize, n: usize) -> Vec<(usize, usize)> {
+    get_manhattan_neighbours(pos, m, n).into_iter().chain(get_diagonal_neighbours(pos, m, n)).collect()
+}
+
 pub fn get_vertical_neighbours(pos: (usize, usize), n: usize) -> Vec<(usize, usize)> {
     let mut result = Vec::new();
     let (y, x) = pos;
