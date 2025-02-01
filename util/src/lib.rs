@@ -3,6 +3,7 @@ pub mod num_utils;
 pub mod combinatorics;
 pub mod range_utils;
 pub mod tuple_maths;
+pub mod hex_utils;
 
 pub fn add(left: u64, right: u64) -> u64 {
     left + right
