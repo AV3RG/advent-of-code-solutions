@@ -4,6 +4,8 @@ pub mod combinatorics;
 pub mod range_utils;
 pub mod tuple_maths;
 pub mod hex_utils;
+pub mod bit_utils;
+pub mod quad_utils;
 
 pub fn add(left: u64, right: u64) -> u64 {
     left + right
