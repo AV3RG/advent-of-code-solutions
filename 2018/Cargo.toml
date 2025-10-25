@@ -30,3 +30,5 @@ tinyjson = "2.5.1"
 # Solution dependencies
 aoc-utils = { path = "../util" }
 itertools = "0.14.0"
+regex = "1.11.1"
+pathfinding = "4.14.0"
